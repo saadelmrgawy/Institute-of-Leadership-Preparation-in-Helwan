@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تواصل معنا - معهد إعداد القادة بحلوان</title>
+  <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="shortcut icon" href="./assets/إعداد-القادة.png" type="image/x-icon">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <style>
+    :root {
+      --primary-color: #0d2d5e;
+      --primary-hover: #1a3d7a;
+      --accent-color: #d4af37;
+      --golden-hover: #ffd700;
+      --text-color: #fff;
+      --bg-overlay: rgba(0, 0, 50, 0.4);
+      --form-bg: rgba(255, 255, 255, 0.1);
+      --input-bg: rgba(255,255,255,0.2);
+      --input-hover: rgba(255,255,255,0.3);
+      --border-radius: 14px;
+      --card-bg: rgba(255, 255, 255, 0.08);
+      --mobile-breakpoint: 768px;
+      --tablet-breakpoint: 992px;
+      --font-kufi: 'Reem Kufi', sans-serif;
+      --font-tajawal: 'Tajawal', sans-serif;
+    }
+    
+    body {
+      margin: 0;
+      font-family: var(--font-tajawal);
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                  url('./assets/bg-space.jpg');
+      color: var(--text-color);
+      overflow-x: hidden;
+      font-size: 16px;
+    }
+    
+    .overlay {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      background: linear-gradient(135deg, rgba(0, 73, 142, 0.384) 0%, rgba(80, 45, 0, 0.562) 100%);
+    } 
+    
+    /* شريط التنقل - شفاف تماماً */
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 5%;
+      background: transparent;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 90%;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+    
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 120px;
+      position: relative;
+    }
+    
+    .logo-section img {
+      height: 60px;
+      width: auto;
+      transition: transform 0.3s;
+      cursor: pointer;
+      opacity: 0;
+      animation: fadeInLogos 1.5s ease-in-out forwards;
+    }
+    
+    @keyframes fadeInLogos {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    
+    .nav-links {
+      display: flex;
+      flex-grow: 1;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link {
+      padding: 10px 15px;
+      margin: 0 3px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: var(--border-radius);
+      transition: all 0.3s;
+      position: relative;
+      cursor: pointer;
+      z-index: 2;
+      font-size: 0.95rem;
+      white-space: nowrap;
+      font-family: var(--font-kufi);
+    }
+    
+    .nav-link:hover, .nav-link.active {
+      background: linear-gradient(45deg, var(--primary-color), var(--primary-hover));
+      color: #fff;
+      box-shadow: 0 0 15px rgba(13, 45, 94, 0.5);
+    }
+    
+    [lang="ar"] .user-actions {
+      margin-right: auto;
+      margin-left: 0;
+    }
+    
+    [lang="en"] .user-actions {
+      margin-left: auto;
+      margin-right: 0;
+    }
+    
+    .user-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      z-index: 2;
+      min-width: 120px;
+      justify-content: flex-start;
+    }
+    
+    /* لغة ذهبية - أيقونة فقط */
+    .language-toggle {
+      font-size: 1.3em;
+      padding: 10px 12px;
+      border-radius: var(--border-radius);
+      background: rgba(0, 0, 0, 0.3);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      height: auto;
+      width: 50px;
+    }
+    
+    .language-toggle:hover {
+      background: linear-gradient(45deg, var(--primary-color), var(--primary-hover));
+      color: #fff;
+      box-shadow: 0 0 15px rgba(13, 45, 94, 0.5);
+    }
+    
+    .language-toggle::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .language-toggle:hover::before {
+      transform: translateX(100%);
+    }
+    
+    /* محتوى الترحيب في الموبايل */
+    .mobile-hero {
+      display: none;
+      text-align: center;
+      padding: 0;
+      background: transparent;
+      height: 100vh;
+      justify-content: center;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .mobile-hero-content {
+      padding: 100px 5% 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* أنيميشن الشعار في الموبايل - نزول من فوق */
+    .mobile-hero-logo {
+      max-width: 280px;
+      margin: 0 auto 30px;
+      opacity: 0;
+      animation: fadeInScale 1.5s ease-in-out forwards;
+    }
+    
+    .mobile-hero-title {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      color: var(--accent-color);
+      font-family: var(--font-kufi);
+      line-height: 1.3;
+    }
+    
+    .mobile-hero-title:first-of-type {
+      margin-bottom: 5px;
+    }
+    
+    .mobile-hero-title:last-of-type {
+      margin-bottom: 20px;
+    }
+    
+    .mobile-hero-subtitle {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      font-family: var(--font-tajawal);
+      line-height: 1.6;
+    }
+    
+    .mobile-hero-text {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      font-family: var(--font-tajawal);
+    }
+    
+    .mobile-hero-buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    
+    /* محتوى الترحيب في الكمبيوتر */
+    .desktop-hero {
+      display: flex;
+      text-align: center;
+      padding: 0;
+      background: transparent;
+      height: 100vh;
+      justify-content: center;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .desktop-hero-content {
+      padding: 100px 5% 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .desktop-hero-logo {
+      max-width: 350px;
+      margin: 0 auto 40px;
+      opacity: 0;
+      animation: fadeInScale 1.5s ease-in-out forwards;
+    }
+    
+    .desktop-hero-title {
+      font-size: 3.5rem;
+      margin-bottom: 15px;
+      color: var(--accent-color);
+      font-family: var(--font-kufi);
+      line-height: 1.2;
+    }
+    
+    .desktop-hero-title:first-of-type {
+      margin-bottom: 10px;
+    }
+    
+    .desktop-hero-title:last-of-type {
+      margin-bottom: 30px;
+    }
+    
+    .desktop-hero-subtitle {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      font-family: var(--font-tajawal);
+      line-height: 1.6;
+    }
+    
+    .desktop-hero-text {
+      font-size: 1.5rem;
+      line-height: 1.6;
+      margin-bottom: 40px;
+      font-family: var(--font-tajawal);
+      max-width: 800px;
+    }
+    
+    .desktop-hero-buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+      gap: 20px;
+    }
+    
+    .hero-button {
+      padding: 15px 30px;
+      border-radius: var(--border-radius);
+      background: linear-gradient(45deg, var(--primary-color), var(--primary-hover));
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.2rem;
+      transition: all 0.3s;
+      font-family: var(--font-kufi);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .hero-button:hover {
+      background: linear-gradient(45deg, var(--accent-color), var(--golden-hover));
+      color: #000;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(212, 175, 55, 0.4);
+    }
+    
+    .hero-button.secondary {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .hero-button.secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+    
+    @keyframes fadeInScale {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    
+    /* تحسينات للهواتف المحمولة */
+    @media (max-width: 768px) {
+      .mobile-hero {
+        display: flex;
+      }
+      
+      .desktop-hero {
+        display: none;
+      }
+      
+      .nav-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 90%;
+        background: transparent;
+        padding: 8px 5%;
+      }
+      
+      .mobile-hero-content {
+        padding-top: 80px;
+      }
+    }
+    
+    @media (min-width: 769px) {
+      .desktop-hero {
+        display: flex;
+      }
+      
+      .mobile-hero {
+        display: none;
+      }
+    }
+    
+    /* قسم التواصل الرئيسي */
+    .contact-page-section {
+      padding: 120px 5% 60px;
+      background: rgba(0, 0, 0, 0.3);
+      text-align: center;
+      position: relative;
+      min-height: 100vh;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .section-title {
+      font-size: 3em;
+      color: var(--accent-color);
+      margin: 0 auto 15px;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 10px;
+      font-family: var(--font-kufi);
+      text-align: center;
+      width: 100%;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--primary-color);
+      border-radius: 2px;
+    }
+    
+    .section-subtitle {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+      font-family: var(--font-tajawal);
+    }
+    
+    /* شبكة محتوى التواصل - 2 كروت في كل صف */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto 50px;
+    }
+    
+    .contact-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 30px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .contact-card:hover {
+      background: linear-gradient(45deg, var(--primary-color), var(--primary-hover));
+      color: #fff;
+      box-shadow: 0 0 15px rgba(13, 45, 94, 0.5);
+      transform: translateY(-10px);
+    }
+
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+
+    .contact-card:hover::before {
+      transform: translateX(100%);
+    }
+
+    .contact-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+      margin-bottom: 20px;
+      transition: all 0.3s;
+    }
+
+    .contact-card:hover .contact-icon {
+      background: var(--accent-color);
+      transform: scale(1.1);
+    }
+
+    .contact-card-title {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: var(--accent-color);
+      font-family: var(--font-kufi);
+      transition: all 0.3s;
+    }
+
+    .contact-card:hover .contact-card-title {
+      color: white;
+    }
+
+    .contact-card-content {
+      font-family: var(--font-tajawal);
+      line-height: 1.6;
+    }
+
+/* قسم نموذج التواصل - تصميم أكثر احترافية ومحسّن */
+.contact-form-section {
+  padding: 60px 5%;
+  background: rgba(0, 0, 0, 0.2);
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.form-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--form-bg);
+  border-radius: var(--border-radius);
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.form-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: var(--accent-color);
+  font-family: var(--font-kufi);
+}
+
+.contact-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-label {
+  margin-bottom: 8px;
+  font-weight: 500;
+  font-family: var(--font-tajawal);
+  color: var(--accent-color);
+}
+
+.form-input, .form-textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: var(--border-radius);
+  background: var(--input-bg);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: white;
+  font-family: var(--font-tajawal);
+  transition: all 0.3s;
+  box-sizing: border-box;
+}
+
+.form-input:focus, .form-textarea:focus {
+  outline: none;
+  background: var(--input-hover);
+  border-color: var(--accent-color);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.form-textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.form-submit {
+  grid-column: 1 / -1;
+  padding: 15px 30px;
+  border-radius: var(--border-radius);
+  background: linear-gradient(45deg, var(--primary-color), var(--primary-hover));
+  color: white;
+  border: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: var(--font-kufi);
+  margin-top: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.form-submit:hover {
+  background: linear-gradient(45deg, var(--accent-color), var(--golden-hover));
+  color: #000;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+}
+
+.form-submit::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: translateX(-100%);
+  transition: 0.6s;
+}
+
+.form-submit:hover::before {
+  transform: translateX(100%);
+}
+
+/* ✅ تحسين التجاوب - في الموبايل صف واحد */
+@media (max-width: 768px) {
+  .contact-form {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group.full-width {
+    grid-column: auto;
+  }
+}
+
+
+    /* قسم الخريطة */
+    .map-section {
+      padding: 60px 5%;
+      background: rgba(0, 0, 0, 0.3);
+      margin-bottom: 50px;
+      position: relative;
+    }
+
+    .map-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 450px;
+      border: none;
+    }
+
+    /* قسم وسائل التواصل الاجتماعي */
+    .social-section {
+      padding: 60px 5%;
+      background: rgba(0, 0, 0, 0.2);
+      margin-bottom: 50px;
+      position: relative;
+      text-align: center;
+    }
+
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .social-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 30px 20px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .social-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    }
+
+    .social-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      transition: all 0.3s;
+    }
+
+    .social-card.facebook {
+      border-top: 5px solid #1877F2;
+    }
+
+    .social-card.youtube {
+      border-top: 5px solid #FF0000;
+    }
+
+    .social-card.website {
+      border-top: 5px solid var(--accent-color);
+    }
+
+    .social-card-title {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: var(--accent-color);
+      font-family: var(--font-kufi);
+    }
+
+    .social-card-content {
+      font-family: var(--font-tajawal);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .social-link {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: var(--border-radius);
+      background: var(--primary-color);
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s;
+      font-family: var(--font-kufi);
+    }
+
+    .social-link:hover {
+      background: var(--accent-color);
+      color: #000;
+      transform: translateY(-3px);
+    }
+
+    /* قسم أوقات العمل */
+    .hours-section {
+      padding: 60px 5%;
+      background: rgba(0, 0, 0, 0.3);
+      margin-bottom: 50px;
+      position: relative;
+    }
+
+    .hours-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .hours-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: var(--accent-color);
+      font-family: var(--font-kufi);
+    }
+
+    .hours-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .hours-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-family: var(--font-tajawal);
+    }
+
+    .hours-item:last-child {
+      border-bottom: none;
+    }
+
+    .hours-day {
+      font-weight: 600;
+    }
+
+    .hours-time {
+      color: var(--accent-color);
+    }
+
+    /* الفوتر */
+    .footer {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 40px 5% 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .footer-col {
+      direction: rtl;
+    }
+    
+    [lang="en"] .footer-col {
+      direction: ltr;
+      text-align: left;
+    }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .footer-logo img {
+      height: 50px;
+      opacity: 0;
+      animation: popUpFadeIn 1s ease-in-out forwards;
+    }
+    
+    @keyframes popUpFadeIn {
+      0% { 
+        opacity: 0; 
+        transform: scale(0.5);
+      }
+      70% {
+        transform: scale(1.1);
+      }
+      100% { 
+        opacity: 1; 
+        transform: scale(1);
+      }
+    }
+    
+    .footer-about {
+      font-size: 0.9em;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      font-family: var(--font-tajawal);
+    }
+    
+    .footer-social {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .footer-social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      color: white;
+      font-size: 1.2em;
+    }
+    
+    .footer-social-icon:hover {
+      background: linear-gradient(45deg, var(--accent-color), var(--golden-hover));
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+      color: #000;
+    }
+    
+    .footer-social-icon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .footer-social-icon:hover::before {
+      transform: translateX(100%);
+    }
+    
+    .footer-links h3 {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      color: var(--accent-color);
+      font-family: var(--font-kufi);
+    }
+    
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-block;
+      font-family: var(--font-tajawal);
+    }
+    
+    .footer-links a:hover {
+      color: var(--golden-hover);
+      padding-right: 5px;
+    }
+    
+    [lang="en"] .footer-links a:hover {
+      padding-right: 0;
+      padding-left: 5px;
+    }
+    
+    .footer-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+      margin: 30px 0;
+      grid-column: 1 / -1;
+    }
+    
+    .footer-copyright {
+      text-align: center;
+      font-size: 0.9em;
+      opacity: 0.7;
+      grid-column: 1 / -1;
+      font-family: var(--font-tajawal);
+    }
+    
+    /* تأثيرات الجزيئات - نمط الرمال */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .particle {
+      position: absolute;
+      background: rgba(212, 175, 55, 0.7);
+      border-radius: 50%;
+      animation: floatParticle linear infinite;
+      box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+    }
+    
+    @keyframes floatParticle {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+    }
+    
+    /* قائمة الهاتف المنسدلة */
+    .hamburger-menu {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 20px;
+      cursor: pointer;
+      z-index: 1001;
+      margin-left: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px;
+      border-radius: var(--border-radius);
+      transition: all 0.3s;
+    }
+    
+    .hamburger-menu:hover {
+      background: linear-gradient(45deg, var(--primary-color), var(--primary-hover));
+    }
+    
+    .hamburger-line {
+      width: 100%;
+      height: 3px;
+      background: white;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+    
+    .hamburger-menu.active .hamburger-line:nth-child(1) {
+      transform: translateY(8.5px) rotate(45deg);
+    }
+    
+    .hamburger-menu.active .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .hamburger-menu.active .hamburger-line:nth-child(3) {
+      transform: translateY(-8.5px) rotate(-45deg);
+    }
+    
+    /* قائمة الموبايل المنسدلة من المنتصف */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(13, 45, 94, 0.98);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .mobile-menu .nav-link {
+      width: 80%;
+      max-width: 300px;
+      margin: 10px 0;
+      padding: 15px 20px;
+      text-align: center;
+      font-size: 1.2em;
+    }
+    
+    /* تحسينات للهواتف المحمولة */
+    @media (max-width: 768px) {
+      .nav-bar {
+        flex-wrap: nowrap;
+        padding: 8px 5%;
+        width: 90%;
+      }
+      
+      .logo-section {
+        order: 1;
+        flex: 0 0 auto;
+      }
+      
+      .logo-section img {
+        height: 45px;
+      }
+      
+      .user-actions {
+        order: 2;
+        flex: 0 0 auto;
+        margin-left: auto;
+        margin-right: 0;
+        gap: 10px;
+      }
+      
+      .hamburger-menu {
+        order: 3;
+        display: flex;
+        margin-left: 0;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-menu {
+        display: flex;
+      }
+      
+      .language-toggle span {
+        display: none;
+      }
+      
+      .section-title {
+        font-size: 2.5em;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-col {
+        text-align: center;
+      }
+      
+      [lang="en"] .footer-col {
+        text-align: center;
+      }
+      
+      .footer-links ul {
+        text-align: center;
+      }
+      
+      .footer-links a:hover {
+        padding-right: 0;
+        padding-left: 5px;
+      }
+      
+      /* في الموبايل: كل كارت في صف منفصل */
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .contact-form {
+        grid-template-columns: 1fr;
+      }
+      
+      .social-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .nav-bar {
+        padding: 8px 5%;
+      }
+      
+      .logo-section img {
+        height: 40px;
+      }
+      
+      .mobile-hero-title {
+        font-size: 1.8rem;
+      }
+      
+      .mobile-hero-subtitle {
+        font-size: 1.2rem;
+      }
+      
+      .mobile-hero-text {
+        font-size: 1rem;
+      }
+      
+      .section-title {
+        font-size: 2em;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-col {
+        text-align: center;
+      }
+      
+      .form-container {
+        padding: 20px;
+      }
+      
+      .hours-container {
+        padding: 20px;
+      }
+    }
+    
+    @media (max-width: 400px) {
+      .section-title {
+        font-size: 1.8em;
+      }
+      
+      .mobile-hero-title {
+        font-size: 1.5rem;
+      }
+      
+      .mobile-hero-subtitle {
+        font-size: 1rem;
+      }
+    }
+    
+    /* تأثيرات WOW.js - تعديل الأنيميشن - بوب أب ومن تحت لفوق ومن فوق لتحت */
+    .wow {
+      visibility: hidden;
+      animation-duration: 1.5s;
+    }
+    
+    /* أنيميشن من الأعلى للأسفل */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .animate__fadeInDown {
+      animation-name: fadeInDown;
+    }
+    
+    /* أنيميشن من الأسفل للأعلى */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .animate__fadeInUp {
+      animation-name: fadeInUp;
+    }
+    
+    /* أنيميشن بوب أب */
+    @keyframes popUp {
+      0% {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+      70% {
+        transform: scale(1.1);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
+    .animate__popUp {
+      animation-name: popUp;
+    }
+    
+    /* تحسينات إضافية للصفحة */
+    .contact-cta {
+      text-align: center;
+      padding: 40px 5%;
+      background: rgba(0, 0, 0, 0.2);
+      margin-bottom: 50px;
+    }
+    
+    .cta-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .cta-title {
+      font-size: 2.5rem;
+      color: var(--accent-color);
+      margin-bottom: 20px;
+      font-family: var(--font-kufi);
+    }
+    
+    .cta-text {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      font-family: var(--font-tajawal);
+    }
+    
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .cta-button {
+      padding: 15px 30px;
+      border-radius: var(--border-radius);
+      background: linear-gradient(45deg, var(--primary-color), var(--primary-hover));
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+      font-family: var(--font-kufi);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .cta-button:hover {
+      background: linear-gradient(45deg, var(--accent-color), var(--golden-hover));
+      color: #000;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+    }
+    
+    .cta-button.secondary {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .cta-button.secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+    
+    /* تحسينات النموذج */
+    .form-group {
+      position: relative;
+    }
+    
+    .form-input:valid ~ .form-label,
+    .form-input:focus ~ .form-label {
+      top: -10px;
+      font-size: 0.8rem;
+      color: var(--accent-color);
+    }
+    
+    .form-label {
+      position: absolute;
+      top: 12px;
+      right: 15px;
+      transition: all 0.3s;
+      pointer-events: none;
+    }
+    
+    .form-input:not(:placeholder-shown) ~ .form-label {
+      top: -10px;
+      font-size: 0.8rem;
+      color: var(--accent-color);
+    }
+    
+    [lang="en"] .form-label {
+      right: auto;
+      left: 15px;
+    }
+    
+    /* تحسينات إضافية */
+    .contact-card {
+      backdrop-filter: blur(10px);
+    }
+    
+    .social-card {
+      backdrop-filter: blur(10px);
+    }
+    
+    .form-container {
+      backdrop-filter: blur(10px);
+    }
+    
+    .hours-container {
+      backdrop-filter: blur(10px);
+    }
+    
+    /* تأثيرات تفاعلية */
+    .contact-card:hover .contact-icon i {
+      animation: bounce 0.6s;
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 60%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-10px);
+      }
+      80% {
+        transform: translateY(-5px);
+      }
+    }
+    
+    /* تحسينات للهواتف المحمولة */
+    @media (max-width: 768px) {
+      .cta-title {
+        font-size: 2rem;
+      }
+      
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .cta-button {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="overlay"></div>
+<div class="particles" id="particles"></div>
+
+<!-- شريط التنقل - شفاف تماماً -->
+<div class="nav-bar">
+  <div class="logo-section">
+    <img src="./assets/وزارة-التعليم.png" alt="وزارة التعليم العالي والبحث العلمي" class="wow animate__animated animate__fadeInDown">
+  </div>
+  
+  <div class="nav-links" id="nav-links">
+    <a href="index.html" class="nav-link wow animate__animated animate__fadeInDown" data-wow-delay="0.1s" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+    <a href="maps.html" class="nav-link wow animate__animated animate__fadeInDown" data-wow-delay="0.2s" data-ar=" خريطة المعهد" data-en="About">خريطة المعهد</a>
+    <a href="about.html" class="nav-link wow animate__animated animate__fadeInDown" data-wow-delay="0.3s" data-ar="عن المعهد" data-en="Activities">عن المعهد</a>
+    <a href="call-us.html" class="nav-link active wow animate__animated animate__fadeInDown" data-wow-delay="0.4s" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+  </div>
+  
+  <div class="user-actions">
+    <div class="language-toggle wow animate__animated animate__fadeInDown" data-wow-delay="0.5s" onclick="toggleLanguage()">
+      <i data-feather="globe"></i>
+    </div>
+    
+    <div class="hamburger-menu" id="hamburger-menu">
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+    </div>
+  </div>
+</div>
+
+<!-- قائمة الموبايل المنسدلة -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html" class="nav-link wow animate__animated animate__popUp" data-wow-delay="0.1s" data-ar="الرئيسية" data-en="Home"><i data-feather="home"></i> الرئيسية</a>
+  <a href="maps.html" class="nav-link wow animate__animated animate__popUp" data-wow-delay="0.2s" data-ar="خريطة المعهد" data-en="About"><i data-feather="info"></i> خريطة المعهد </a>
+  <a href="about.html" class="nav-link wow animate__animated animate__popUp" data-wow-delay="0.3s" data-ar=" عن المعهد" data-en="Statistics"><i data-feather="bar-chart"></i>  عن المعهد</a>
+  <a href="call-us.html" class="nav-link active wow animate__animated animate__popUp" data-wow-delay="0.4s" data-ar="تواصل معنا" data-en="Contact"><i data-feather="mail"></i> تواصل معنا</a>
+</div>
+
+<!-- محتوى الترحيب في الكمبيوتر -->
+<div class="desktop-hero">
+  <div class="desktop-hero-content">
+    <img src="./assets/إعداد-القادة.png" alt="شعار معهد إعداد القادة" class="desktop-hero-logo wow animate__animated animate__popUp">
+    <h1 class="desktop-hero-title wow animate__animated animate__fadeInDown" data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</h1>
+    <h2 class="desktop-hero-subtitle wow animate__animated animate__fadeInUp" data-wow-delay="0.4s" style="color: var(--accent-color);" data-ar="معهد إعداد القادة بحلوان" data-en="Institute of Leadership Preparation in Helwan">معهد إعداد القادة بحلوان</h2>
+    <p class="desktop-hero-text wow animate__animated animate__fadeInUp" data-wow-delay="0.6s" data-ar="نحن هنا للإجابة على استفساراتكم وتلقي ملاحظاتكم. تواصلوا معنا عبر أي من الوسائل المتاحة أدناه." data-en="We are here to answer your inquiries and receive your feedback. Contact us through any of the available means below.">نحن هنا للإجابة على استفساراتكم وتلقي ملاحظاتكم. تواصلوا معنا عبر أي من الوسائل المتاحة أدناه.</p>
+    <div class="desktop-hero-buttons">
+    </div>
+  </div>
+</div>
+
+<!-- محتوى الترحيب في الموبايل -->
+<div class="mobile-hero">
+  <div class="mobile-hero-content">
+    <img src="./assets/إعداد-القادة.png" alt="شعار معهد إعداد القادة" class="mobile-hero-logo wow animate__animated animate__popUp">
+    <h1 class="mobile-hero-title wow animate__animated animate__fadeInDown" data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</h1>
+    <h2 class="mobile-hero-subtitle wow animate__animated animate__fadeInUp" data-wow-delay="0.4s" style="color: var(--accent-color);" data-ar="معهد إعداد القادة بحلوان" data-en="Institute of Leadership Preparation in Helwan">معهد إعداد القادة بحلوان</h2>
+    <p class="mobile-hero-text wow animate__animated animate__fadeInUp" data-wow-delay="0.6s" data-ar="نحن هنا للإجابة على استفساراتكم وتلقي ملاحظاتكم. تواصلوا معنا عبر أي من الوسائل المتاحة أدناه." data-en="We are here to answer your inquiries and receive your feedback. Contact us through any of the available means below.">نحن هنا للإجابة على استفساراتكم وتلقي ملاحظاتكم. تواصلوا معنا عبر أي من الوسائل المتاحة أدناه.</p>
+  </div>
+</div>
+
+<!-- قسم التواصل الرئيسي -->
+<div class="contact-page-section">
+  <h2 class="section-title wow animate__animated animate__fadeInDown" data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</h2>
+  
+  <p class="section-subtitle wow animate__animated animate__fadeInUp" data-wow-delay="0.2s" 
+     data-ar="يسعدنا تواصلكم معنا في أي وقت. فريق معهد إعداد القادة بحلوان جاهز للإجابة على استفساراتكم وتلقي ملاحظاتكم." 
+     data-en="We are happy to hear from you at any time. The team at the Institute of Leadership Preparation in Helwan is ready to answer your inquiries and receive your feedback.">
+     يسعدنا تواصلكم معنا في أي وقت. فريق معهد إعداد القادة بحلوان جاهز للإجابة على استفساراتكم وتلقي ملاحظاتكم.
+  </p>
+  
+  <div class="contact-grid">
+    <!-- كارت 1 -->
+    <div class="contact-card wow animate__animated animate__zoomIn" data-wow-delay="0.1s">
+      <div class="contact-icon wow animate__animated animate__fadeInUp" data-wow-delay="0.2s">
+        <i data-feather="map-pin"></i>
+      </div>
+      <h3 class="contact-card-title wow animate__animated animate__fadeInUp" data-wow-delay="0.3s" data-ar="العنوان" data-en="Address">العنوان</h3>
+      <p class="contact-card-content wow animate__animated animate__fadeInUp" data-wow-delay="0.4s" data-ar="شارع عبد الله باشا - حلوان، محافظة القاهرة، مصر" data-en="Abdullah Pasha Street - Helwan, Cairo Governorate, Egypt">شارع عبد الله باشا - حلوان، محافظة القاهرة، مصر</p>
+    </div>
+    
+    <!-- كارت 2 -->
+    <div class="contact-card wow animate__animated animate__zoomIn" data-wow-delay="0.2s">
+      <div class="contact-icon wow animate__animated animate__fadeInUp" data-wow-delay="0.3s">
+        <i data-feather="phone"></i>
+      </div>
+      <h3 class="contact-card-title wow animate__animated animate__fadeInUp" data-wow-delay="0.4s" data-ar="الهاتف" data-en="Phone">الهاتف</h3>
+      <p class="contact-card-content wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">0228165187</p>
+    </div>
+    
+    <!-- كارت 3 -->
+    <div class="contact-card wow animate__animated animate__zoomIn" data-wow-delay="0.3s">
+      <div class="contact-icon wow animate__animated animate__fadeInUp" data-wow-delay="0.4s">
+        <i data-feather="mail"></i>
+      </div>
+      <h3 class="contact-card-title wow animate__animated animate__fadeInUp" data-wow-delay="0.5s" data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</h3>
+      <p class="contact-card-content wow animate__animated animate__fadeInUp" data-wow-delay="0.6s">leadership.d.institute@gmail.com</p>
+    </div>
+    
+    <!-- كارت 4 -->
+    <div class="contact-card wow animate__animated animate__zoomIn" data-wow-delay="0.4s">
+      <div class="contact-icon wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">
+        <i data-feather="clock"></i>
+      </div>
+      <h3 class="contact-card-title wow animate__animated animate__fadeInUp" data-wow-delay="0.6s" data-ar="أوقات العمل" data-en="Working Hours">أوقات العمل</h3>
+      <p class="contact-card-content wow animate__animated animate__fadeInUp" data-wow-delay="0.7s" data-ar="من الأحد إلى الخميس: 8 صباحاً - 4 مساءً" data-en="Sunday to Thursday: 8 AM - 4 PM">من الأحد إلى الخميس: 8 صباحاً - 4 مساءً</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- قسم الدعوة للتواصل -->
+<div class="contact-cta">
+  <div class="cta-container wow animate__animated animate__fadeInUp">
+    <h3 class="cta-title" data-ar="هل لديك استفسار؟" data-en="Have a Question?">هل لديك استفسار؟</h3>
+    <p class="cta-text" data-ar="فريقنا متاح دائماً لمساعدتك. لا تتردد في التواصل معنا عبر أي من الوسائل المتاحة، وسنكون سعداء بتقديم المساعدة." data-en="Our team is always available to help you. Feel free to contact us through any of the available means, and we will be happy to assist.">فريقنا متاح دائماً لمساعدتك. لا تتردد في التواصل معنا عبر أي من الوسائل المتاحة، وسنكون سعداء بتقديم المساعدة.</p>
+    <div class="cta-buttons">
+      <a href="tel:0228165187" class="cta-button wow animate__animated animate__popUp" data-wow-delay="0.2s">
+        <i data-feather="phone"></i>
+        <span data-ar="اتصل بنا" data-en="Call Us">اتصل بنا</span>
+      </a>
+      <a href="mailto:leadership.d.institute@gmail.com" class="cta-button secondary wow animate__animated animate__popUp" data-wow-delay="0.3s">
+        <i data-feather="mail"></i>
+        <span data-ar="أرسل بريداً" data-en="Send Email">أرسل بريداً</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- قسم نموذج التواصل -->
+<div class="contact-form-section">
+  <div class="form-container wow animate__animated animate__popUp">
+    <h3 class="form-title" data-ar="أرسل رسالة" data-en="Send a Message">أرسل رسالة</h3>
+    <form class="contact-form" id="contact-form">
+      <div class="form-group">
+        <input type="text" id="name" class="form-input" placeholder=" " required>
+        <label class="form-label" for="name" data-ar="الاسم الكامل" data-en="Full Name">الاسم الكامل</label>
+      </div>
+      
+      <div class="form-group">
+        <input type="email" id="email" class="form-input" placeholder=" " required>
+        <label class="form-label" for="email" data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label>
+      </div>
+      
+      <div class="form-group">
+        <input type="tel" id="phone" class="form-input" placeholder=" ">
+        <label class="form-label" for="phone" data-ar="رقم الهاتف" data-en="Phone Number">رقم الهاتف</label>
+      </div>
+      
+      <div class="form-group">
+        <input type="text" id="subject" class="form-input" placeholder=" " required>
+        <label class="form-label" for="subject" data-ar="الموضوع" data-en="Subject">الموضوع</label>
+      </div>
+      
+      <div class="form-group full-width">
+        <textarea id="message" class="form-textarea" placeholder=" " required></textarea>
+        <label class="form-label" for="message" data-ar="الرسالة" data-en="Message">الرسالة</label>
+      </div>
+      
+      <button type="submit" class="form-submit" data-ar="إرسال الرسالة" data-en="Send Message">إرسال الرسالة</button>
+    </form>
+  </div>
+</div>
+
+<!-- قسم الخريطة -->
+<div class="map-section">
+  <h2 class="section-title wow animate__animated animate__fadeInUp" data-wow-duration="1s"
+      data-ar="موقعنا على الخريطة" data-en="Our Location on Map">موقعنا على الخريطة</h2>
+  
+  <div class="map-container wow animate__animated animate__zoomIn" data-wow-delay="0.2s" data-wow-duration="1s">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3456.123456789012!2d31.34567890123456!3d29.87654321098765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjnCsDUyJzM1LjYiTiAzMcKwMjAnNDQuNiJF!5e0!3m2!1sen!2seg!4v1234567890123!5m2!1sen!2seg" 
+      allowfullscreen="" 
+      loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</div>
+
+
+<!-- قسم وسائل التواصل الاجتماعي -->
+<div class="social-section">
+  <h2 class="section-title wow animate__animated animate__fadeInUp" data-wow-duration="1s"
+      data-ar="وسائل التواصل الاجتماعي" data-en="Social Media">وسائل التواصل الاجتماعي</h2>
+  
+  <div class="social-grid">
+    <div class="social-card facebook wow animate__animated animate__zoomIn" data-wow-delay="0.1s" data-wow-duration="0.8s">
+      <div class="social-icon wow animate__animated animate__fadeInUp" data-wow-delay="0.2s">
+        <i data-feather="facebook"></i>
+      </div>
+      <h3 class="social-card-title wow animate__animated animate__fadeInUp" data-wow-delay="0.3s"
+          data-ar="فيسبوك" data-en="Facebook">فيسبوك</h3>
+      <p class="social-card-content wow animate__animated animate__fadeInUp" data-wow-delay="0.4s"
+          data-ar="تابعنا على فيسبوك للحصول على آخر الأخبار والفعاليات" 
+          data-en="Follow us on Facebook for the latest news and events">تابعنا على فيسبوك للحصول على آخر الأخبار والفعاليات</p>
+      <a href="#" class="social-link wow animate__animated animate__fadeInUp" data-wow-delay="0.5s"
+         data-ar="زيارة الصفحة" data-en="Visit Page">زيارة الصفحة</a>
+    </div>
+    
+    <div class="social-card youtube wow animate__animated animate__zoomIn" data-wow-delay="0.2s" data-wow-duration="0.8s">
+      <div class="social-icon wow animate__animated animate__fadeInUp" data-wow-delay="0.3s">
+        <i data-feather="youtube"></i>
+      </div>
+      <h3 class="social-card-title wow animate__animated animate__fadeInUp" data-wow-delay="0.4s"
+          data-ar="يوتيوب" data-en="YouTube">يوتيوب</h3>
+      <p class="social-card-content wow animate__animated animate__fadeInUp" data-wow-delay="0.5s"
+          data-ar="اشترك في قناتنا على يوتيوب لمشاهدة الفيديوهات والفعاليات" 
+          data-en="Subscribe to our YouTube channel to watch videos and events">اشترك في قناتنا على يوتيوب لمشاهدة الفيديوهات والفعاليات</p>
+      <a href="#" class="social-link wow animate__animated animate__fadeInUp" data-wow-delay="0.6s"
+         data-ar="زيارة القناة" data-en="Visit Channel">زيارة القناة</a>
+    </div>
+    
+    <div class="social-card website wow animate__animated animate__zoomIn" data-wow-delay="0.3s" data-wow-duration="0.8s">
+      <div class="social-icon wow animate__animated animate__fadeInUp" data-wow-delay="0.4s">
+        <i data-feather="globe"></i>
+      </div>
+      <h3 class="social-card-title wow animate__animated animate__fadeInUp" data-wow-delay="0.5s"
+          data-ar="الموقع الإلكتروني" data-en="Website">الموقع الإلكتروني</h3>
+      <p class="social-card-content wow animate__animated animate__fadeInUp" data-wow-delay="0.6s"
+          data-ar="زوروا موقعنا الإلكتروني لمعرفة المزيد عن برامجنا وفعالياتنا" 
+          data-en="Visit our website to learn more about our programs and events">زوروا موقعنا الإلكتروني لمعرفة المزيد عن برامجنا وفعالياتنا</p>
+      <a href="index.html" class="social-link wow animate__animated animate__fadeInUp" data-wow-delay="0.7s"
+         data-ar="زيارة الموقع" data-en="Visit Website">زيارة الموقع</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- قسم أوقات العمل -->
+<div class="hours-section">
+  <div class="hours-container wow animate__animated animate__zoomIn" data-wow-duration="1s">
+    <h3 class="hours-title wow animate__animated animate__fadeInUp" data-wow-delay="0.1s" data-wow-duration="1s"
+      data-ar="أوقات العمل الرسمية" data-en="Official Working Hours">أوقات العمل الرسمية</h3>
+    
+    <ul class="hours-list">
+      <li class="hours-item wow animate__animated animate__fadeInUp" data-wow-delay="0.2s">
+        <span class="hours-day" data-ar="الأحد" data-en="Sunday">الأحد</span>
+        <span class="hours-time">8:00 ص - 4:00 م</span>
+      </li>
+      <li class="hours-item wow animate__animated animate__fadeInUp" data-wow-delay="0.3s">
+        <span class="hours-day" data-ar="الإثنين" data-en="Monday">الإثنين</span>
+        <span class="hours-time">8:00 ص - 4:00 م</span>
+      </li>
+      <li class="hours-item wow animate__animated animate__fadeInUp" data-wow-delay="0.4s">
+        <span class="hours-day" data-ar="الثلاثاء" data-en="Tuesday">الثلاثاء</span>
+        <span class="hours-time">8:00 ص - 4:00 م</span>
+      </li>
+      <li class="hours-item wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">
+        <span class="hours-day" data-ar="الأربعاء" data-en="Wednesday">الأربعاء</span>
+        <span class="hours-time">8:00 ص - 4:00 م</span>
+      </li>
+      <li class="hours-item wow animate__animated animate__fadeInUp" data-wow-delay="0.6s">
+        <span class="hours-day" data-ar="الخميس" data-en="Thursday">الخميس</span>
+        <span class="hours-time">8:00 ص - 4:00 م</span>
+      </li>
+      <li class="hours-item wow animate__animated animate__fadeInUp" data-wow-delay="0.7s">
+        <span class="hours-day" data-ar="الجمعة" data-en="Friday">الجمعة</span>
+        <span class="hours-time" data-ar="إجازة" data-en="Day Off">إجازة</span>
+      </li>
+      <li class="hours-item wow animate__animated animate__fadeInUp" data-wow-delay="0.8s">
+        <span class="hours-day" data-ar="السبت" data-en="Saturday">السبت</span>
+        <span class="hours-time" data-ar="إجازة" data-en="Day Off">إجازة</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- الفوتر -->
+<div class="footer">
+  <div class="footer-content">
+    <!-- القسم الأول: الشعار والوصف والروابط الاجتماعية -->
+    <div class="footer-col">
+      <div class="footer-logo">
+        <img src="./assets/إعداد-القادة.png" alt="شعار معهد إعداد القادة" class="wow animate__animated animate__popUp" data-wow-delay="0.1s">
+        <img src="./assets/وزارة-التعليم.png" alt="وزارة التعليم العالي والبحث العلمي" class="wow animate__animated animate__popUp" data-wow-delay="0.2s">
+      </div>
+      
+      <p class="footer-about wow animate__animated animate__fadeInUp" data-wow-delay="0.3s" data-ar="معهد إعداد القادة بحلوان هو مؤسسة تعليمية رائدة تهدف إلى إعداد القادة وتنمية مهاراتهم من خلال برامج تدريبية متخصصة وفعاليات ثقافية وعلمية متنوعة." data-en="The Institute of Leadership Preparation in Helwan is a leading educational institution that aims to prepare leaders and develop their skills through specialized training programs and various cultural and scientific events.">معهد إعداد القادة بحلوان هو مؤسسة تعليمية رائدة تهدف إلى إعداد القادة وتنمية مهاراتهم من خلال برامج تدريبية متخصصة وفعاليات ثقافية وعلمية متنوعة.</p>
+      
+      <div class="footer-social">
+        <a href="#" class="footer-social-icon wow animate__animated animate__popUp" data-wow-delay="0.4s"><i data-feather="facebook"></i></a>
+        <a href="#" class="footer-social-icon wow animate__animated animate__popUp" data-wow-delay="0.5s"><i data-feather="youtube"></i></a>
+      </div>
+    </div>
+    
+    <!-- القسم الثاني: روابط سريعة -->
+    <div class="footer-col">
+      <h3 class="footer-links-title wow animate__animated animate__fadeInUp" data-wow-delay="0.2s" data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h3>
+      <ul class="footer-links">
+        <li><a href="index.html" class="wow animate__animated animate__popUp" data-wow-delay="0.3s" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+        <li><a href="maps.html" class="wow animate__animated animate__popUp" data-wow-delay="0.4s" data-ar="خريطة المعهد" data-en="Institute Map">خريطة المعهد</a></li>
+        <li><a href="about.html" class="wow animate__animated animate__popUp" data-wow-delay="0.5s" data-ar="عن المعهد" data-en="About Institute">عن المعهد</a></li>
+        <li><a href="call-us.html" class="wow animate__animated animate__popUp" data-wow-delay="0.6s" data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</a></li>
+      </ul>
+    </div>
+    
+    <!-- القسم الثالث: معلومات التواصل -->
+    <div class="footer-col">
+      <h3 class="footer-links-title wow animate__animated animate__fadeInUp" data-wow-delay="0.3s" data-ar="معلومات التواصل" data-en="Contact Information">معلومات التواصل</h3>
+      <ul class="footer-links">
+        <li class="wow animate__animated animate__popUp" data-wow-delay="0.4s"><i data-feather="map-pin"></i> <span data-ar="شارع عبد الله باشا - حلوان، القاهرة" data-en="Abdullah Pasha Street - Helwan, Cairo">شارع عبد الله باشا - حلوان، القاهرة</span></li>
+        <li class="wow animate__animated animate__popUp" data-wow-delay="0.5s"><i data-feather="phone"></i> 0228165187</li>
+        <li class="wow animate__animated animate__popUp" data-wow-delay="0.6s"><i data-feather="mail"></i> leadership.d.institute@gmail.com</li>
+        <li class="wow animate__animated animate__popUp" data-wow-delay="0.7s"><i data-feather="clock"></i> <span data-ar="الأحد - الخميس: 8 ص - 4 م" data-en="Sun - Thu: 8 AM - 4 PM">الأحد - الخميس: 8 ص - 4 م</span></li>
+      </ul>
+    </div>
+    
+    <!-- الخط الفاصل -->
+    <div class="footer-divider"></div>
+    
+    <!-- حقوق النشر -->
+    <div class="footer-copyright wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">
+      <span data-ar="&copy; 2025 جميع الحقوق محفوظة لمعهد إعداد القادة بحلوان - وزارة التعليم العالي والبحث العلمي" data-en="&copy; 2025 All Rights Reserved to Institute of Leadership Preparation in Helwan - Ministry of Higher Education and Scientific Research">&copy; 2025 جميع الحقوق محفوظة لمعهد إعداد القادة بحلوان - وزارة التعليم العالي والبحث العلمي</span>
+    </div>
+    
+    <!-- حقوق الملكية -->
+    <div class="footer-copyright wow animate__animated animate__fadeInUp" data-wow-delay="0.6s">
+      <span data-ar="تم التصميم والبرمجة بواسطة فريق تطوير معهد إعداد القادة" data-en="Designed and developed by the Institute of Leadership Preparation development team">تم التصميم والبرمجة بواسطة فريق تطوير معهد إعداد القادة</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  // تهيئة الصفحة
+  document.addEventListener('DOMContentLoaded', function() {
+    // إنشاء الجزيئات المتحركة
+    createParticles();
+    
+    // التحكم في القائمة المنسدلة على الموبايل
+    setupMobileMenu();
+    
+    // تهيئة WOW.js للأنيميشن - إبطاء السرعة
+    new WOW({
+      animateClass: 'animate__animated',
+      offset: 100,
+      mobile: true,
+      duration: '1.5s'
+    }).init();
+    
+    // تحميل أيقونات Feather
+    feather.replace();
+    
+    // إعداد نموذج التواصل
+    setupContactForm();
+  });
+
+  // تبديل اللغة مع ترجمة كاملة للمحتوى
+  function toggleLanguage() {
+    const currentLang = document.documentElement.lang;
+    const elementsToTranslate = document.querySelectorAll('[data-ar], [data-en]');
+    
+    if (currentLang === 'ar') {
+      document.documentElement.lang = 'en';
+      document.documentElement.dir = 'ltr';
+      document.title = 'Contact Us - Institute of Leadership Preparation in Helwan';
+      
+      // ترجمة جميع العناصر
+      elementsToTranslate.forEach(el => {
+        if (el.dataset.en) {
+          el.textContent = el.dataset.en;
+        }
+      });
+      
+      // تحديث اتجاه أيقونات Feather
+      feather.replace();
+    } else {
+      document.documentElement.lang = 'ar';
+      document.documentElement.dir = 'rtl';
+      document.title = 'تواصل معنا - معهد إعداد القادة بحلوان';
+      
+      // إعادة النصوص إلى العربية
+      elementsToTranslate.forEach(el => {
+        if (el.dataset.ar) {
+          el.textContent = el.dataset.ar;
+        }
+      });
+      
+      // تحديث اتجاه أيقونات Feather
+      feather.replace();
+    }
+  }
+
+  // إنشاء الجزيئات المتحركة - نمط الرمال
+  function createParticles() {
+    const particlesContainer = document.getElementById('particles');
+    const count = Math.floor(window.innerWidth / 20);
+    
+    for (let i = 0; i < count; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      
+      const size = Math.random() * 5 + 2;
+      const posX = Math.random() * window.innerWidth;
+      const duration = Math.random() * 15 + 10;
+      const delay = Math.random() * 10;
+      
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.left = `${posX}px`;
+      particle.style.bottom = '0';
+      particle.style.animationDuration = `${duration}s`;
+      particle.style.animationDelay = `${delay}s`;
+      
+      particlesContainer.appendChild(particle);
+    }
+  }
+
+  // إعداد القائمة المنسدلة للهاتف
+  function setupMobileMenu() {
+    const hamburger = document.getElementById('hamburger-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    hamburger.addEventListener('click', function() {
+      this.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+      
+      if (mobileMenu.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    });
+    
+    document.querySelectorAll('.mobile-menu .nav-link').forEach(link => {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+    
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-bar') && mobileMenu.classList.contains('active')) {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+
+  // إعداد نموذج التواصل لإرسال البريد الإلكتروني
+  function setupContactForm() {
+    const contactForm = document.getElementById('contact-form');
+    
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // جمع بيانات النموذج
+      const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        subject: document.getElementById('subject').value,
+        message: document.getElementById('message').value
+      };
+      
+      // إرسال البريد الإلكتروني باستخدام mailto
+      const emailBody = `
+        الاسم: ${formData.name}
+        البريد الإلكتروني: ${formData.email}
+        رقم الهاتف: ${formData.phone}
+        الموضوع: ${formData.subject}
+        
+        الرسالة:
+        ${formData.message}
+      `;
+      
+      const mailtoLink = `mailto:leadership.d.institute@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(emailBody)}`;
+      
+      // فتح بريد المستخدم الافتراضي
+      window.location.href = mailtoLink;
+      
+      // عرض رسالة نجاح
+      setTimeout(function() {
+        alert('شكراً لك! تم فتح بريدك الإلكتروني لإرسال الرسالة. إذا لم يتم فتح البريد الإلكتروني تلقائياً، يرجى إرسال رسالتك يدوياً إلى leadership.d.institute@gmail.com');
+      }, 1000);
+      
+      // إعادة تعيين النموذج
+      contactForm.reset();
+    });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>خريطة المعهد - معهد إعداد القادة بحلوان</title>
+  <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="shortcut icon" href="./assets/إعداد-القادة.png" type="image/x-icon">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <style>
+    :root {
+      --primary-color: #0d2d5e;
+      --primary-hover: #1a3d7a;
+      --accent-color: #d4af37;
+      --golden-hover: #ffd700;
+      --text-color: #fff;
+      --bg-overlay: rgba(0, 0, 50, 0.4);
+      --form-bg: rgba(255, 255, 255, 0.1);
+      --input-bg: rgba(255,255,255,0.2);
+      --input-hover: rgba(255,255,255,0.3);
+      --border-radius: 14px;
+      --card-bg: rgba(255, 255, 255, 0.08);
+      --mobile-breakpoint: 768px;
+      --tablet-breakpoint: 992px;
+      --font-kufi: 'Reem Kufi', sans-serif;
+      --font-tajawal: 'Tajawal', sans-serif;
+    }
+    
+    body {
+      margin: 0;
+      font-family: var(--font-tajawal);
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                  url('./assets/bg-space.jpg');
+      color: var(--text-color);
+      overflow-x: hidden;
+      font-size: 16px;
+    }
+    
+    .overlay {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      background: linear-gradient(135deg, rgba(0, 73, 142, 0.384) 0%, rgba(80, 45, 0, 0.562) 100%);
+    } 
+    
+    /* شريط التنقل - شفاف تماماً */
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 5%;
+      background: transparent;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 90%;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+    
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 120px;
+      position: relative;
+    }
+    
+    .logo-section img {
+      height: 60px;
+      width: auto;
+      transition: transform 0.3s;
+      cursor: pointer;
+      opacity: 0;
+      animation: fadeInLogos 1.5s ease-in-out forwards;
+    }
+    
+    @keyframes fadeInLogos {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    
+    .nav-links {
+      display: flex;
+      flex-grow: 1;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link {
+      padding: 10px 15px;
+      margin: 0 3px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: var(--border-radius);
+      transition: all 0.3s;
+      position: relative;
+      cursor: pointer;
+      z-index: 2;
+      font-size: 0.95rem;
+      white-space: nowrap;
+      font-family: var(--font-kufi);
+    }
+    
+    .nav-link:hover, .nav-link.active {
+      background: linear-gradient(45deg, var(--primary-color), var(--primary-hover));
+      color: #fff;
+      box-shadow: 0 0 15px rgba(13, 45, 94, 0.5);
+    }
+    
+    [lang="ar"] .user-actions {
+      margin-right: auto;
+      margin-left: 0;
+    }
+    
+    [lang="en"] .user-actions {
+      margin-left: auto;
+      margin-right: 0;
+    }
+    
+    .user-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      z-index: 2;
+      min-width: 120px;
+      justify-content: flex-start;
+    }
+    
+    /* لغة ذهبية - أيقونة فقط */
+    .language-toggle {
+      font-size: 1.3em;
+      padding: 10px 12px;
+      border-radius: var(--border-radius);
+      background: rgba(0, 0, 0, 0.3);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      height: auto;
+      width: 50px;
+    }
+    
+    .language-toggle:hover {
+      background: linear-gradient(45deg, var(--primary-color), var(--primary-hover));
+      color: #fff;
+      box-shadow: 0 0 15px rgba(13, 45, 94, 0.5);
+    }
+    
+    .language-toggle::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .language-toggle:hover::before {
+      transform: translateX(100%);
+    }
+    
+    /* قسم خريطة المعهد */
+    .map-section {
+      padding: 120px 5% 40px;
+      margin-bottom: 50px;
+      text-align: center;
+      position: relative;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .section-title {
+      font-size: 3em;
+      color: var(--accent-color);
+      margin: 0 auto 15px;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 10px;
+      font-family: var(--font-kufi);
+      text-align: center;
+      width: 100%;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--primary-color);
+      border-radius: 2px;
+    }
+    
+    .section-subtitle {
+      font-size: 1.2em;
+      margin-bottom: 40px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+      font-family: var(--font-tajawal);
+    }
+    
+    /* خريطة المعهد */
+    .map-container {
+      max-width: 1000px;
+      margin: 0 auto 40px;
+      position: relative;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    }
+    
+    .map-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    
+    .map-image:hover {
+      transform: scale(1.02);
+    }
+    
+    .download-overlay {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(0,0,0,0.7);
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+    
+    .download-overlay:hover {
+      background: rgba(212, 175, 55, 0.8);
+      transform: scale(1.1);
+    }
+    
+    .download-icon {
+      color: white;
+      font-size: 1.5em;
+    }
+    
+    /* كروت الأماكن المهمة */
+    .places-section {
+      padding: 40px 5%;
+      margin-bottom: 50px;
+    }
+    
+    .places-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .place-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .place-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+      background: rgba(255, 255, 255, 0.12);
+    }
+    
+    .place-image {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .place-content {
+      padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .place-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .place-icon {
+      font-size: 2em;
+      margin-left: 15px;
+      color: var(--accent-color);
+      flex-shrink: 0;
+    }
+    
+    .place-title {
+      font-size: 1.3rem;
+      margin-bottom: 0;
+      color: var(--accent-color);
+      font-family: var(--font-kufi);
+    }
+    
+    .place-desc {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex-grow: 1;
+      font-family: var(--font-tajawal);
+    }
+    
+    .place-btn {
+      padding: 12px 20px;
+      border-radius: var(--border-radius);
+      background: linear-gradient(45deg, var(--primary-color), var(--primary-hover));
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      font-size: 0.95rem;
+      text-align: center;
+      display: inline-block;
+      font-family: var(--font-kufi);
+      align-self: flex-start;
+    }
+    
+    .place-btn:hover {
+      background: linear-gradient(45deg, var(--accent-color), var(--golden-hover));
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+      color: #000;
+    }
+    
+    .place-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .place-btn:hover::before {
+      transform: translateX(100%);
+    }
+    
+    /* الفوتر */
+    .footer {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 40px 5% 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .footer-col {
+      direction: rtl;
+    }
+    
+    [lang="en"] .footer-col {
+      direction: ltr;
+      text-align: left;
+    }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .footer-logo img {
+      height: 50px;
+      opacity: 0;
+      animation: popUpFadeIn 1s ease-in-out forwards;
+    }
+    
+    @keyframes popUpFadeIn {
+      0% { 
+        opacity: 0; 
+        transform: scale(0.5);
+      }
+      70% {
+        transform: scale(1.1);
+      }
+      100% { 
+        opacity: 1; 
+        transform: scale(1);
+      }
+    }
+    
+    .footer-about {
+      font-size: 0.9em;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      font-family: var(--font-tajawal);
+    }
+    
+    .footer-social {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .footer-social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      color: white;
+      font-size: 1.2em;
+    }
+    
+    .footer-social-icon:hover {
+      background: linear-gradient(45deg, var(--accent-color), var(--golden-hover));
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+      color: #000;
+    }
+    
+    .footer-social-icon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: translateX(-100%);
+      transition: 0.6s;
+    }
+    
+    .footer-social-icon:hover::before {
+      transform: translateX(100%);
+    }
+    
+    .footer-links h3 {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      color: var(--accent-color);
+      font-family: var(--font-kufi);
+    }
+    
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-block;
+      font-family: var(--font-tajawal);
+    }
+    
+    .footer-links a:hover {
+      color: var(--golden-hover);
+      padding-right: 5px;
+    }
+    
+    [lang="en"] .footer-links a:hover {
+      padding-right: 0;
+      padding-left: 5px;
+    }
+    
+    .footer-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+      margin: 30px 0;
+      grid-column: 1 / -1;
+    }
+    
+    .footer-copyright {
+      text-align: center;
+      font-size: 0.9em;
+      opacity: 0.7;
+      grid-column: 1 / -1;
+      font-family: var(--font-tajawal);
+    }
+    
+    /* تأثيرات الجزيئات - نمط الرمال */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .particle {
+      position: absolute;
+      background: rgba(212, 175, 55, 0.7);
+      border-radius: 50%;
+      animation: floatParticle linear infinite;
+      box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+    }
+    
+    @keyframes floatParticle {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+    }
+    
+    /* قائمة الهاتف المنسدلة */
+    .hamburger-menu {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 20px;
+      cursor: pointer;
+      z-index: 1001;
+      margin-left: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px;
+      border-radius: var(--border-radius);
+      transition: all 0.3s;
+    }
+    
+    .hamburger-menu:hover {
+      background: linear-gradient(45deg, var(--primary-color), var(--primary-hover));
+    }
+    
+    .hamburger-line {
+      width: 100%;
+      height: 3px;
+      background: white;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+    
+    .hamburger-menu.active .hamburger-line:nth-child(1) {
+      transform: translateY(8.5px) rotate(45deg);
+    }
+    
+    .hamburger-menu.active .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .hamburger-menu.active .hamburger-line:nth-child(3) {
+      transform: translateY(-8.5px) rotate(-45deg);
+    }
+    
+    /* قائمة الموبايل المنسدلة من المنتصف */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(13, 45, 94, 0.98);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-menu.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .mobile-menu .nav-link {
+      width: 80%;
+      max-width: 300px;
+      margin: 10px 0;
+      padding: 15px 20px;
+      text-align: center;
+      font-size: 1.2em;
+    }
+    
+    /* تحسينات للهواتف المحمولة */
+    @media (max-width: 768px) {
+      .nav-bar {
+        flex-wrap: nowrap;
+        padding: 8px 5%;
+        width: 90%;
+      }
+      
+      .logo-section {
+        order: 1;
+        flex: 0 0 auto;
+      }
+      
+      .logo-section img {
+        height: 45px;
+      }
+      
+      .user-actions {
+        order: 2;
+        flex: 0 0 auto;
+        margin-left: auto;
+        margin-right: 0;
+        gap: 10px;
+      }
+      
+      .hamburger-menu {
+        order: 3;
+        display: flex;
+        margin-left: 0;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-menu {
+        display: flex;
+      }
+      
+      .language-toggle span {
+        display: none;
+      }
+      
+      .map-section {
+        padding-top: 100px;
+      }
+      
+      .section-title {
+        font-size: 2.5em;
+      }
+      
+      .places-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-col {
+        text-align: center;
+      }
+      
+      [lang="en"] .footer-col {
+        text-align: center;
+      }
+      
+      .footer-links ul {
+        text-align: center;
+      }
+      
+      .footer-links a:hover {
+        padding-right: 0;
+        padding-left: 5px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .nav-bar {
+        padding: 8px 5%;
+      }
+      
+      .logo-section img {
+        height: 40px;
+      }
+      
+      .section-title {
+        font-size: 2em;
+      }
+      
+      .download-overlay {
+        width: 50px;
+        height: 50px;
+        top: 10px;
+        left: 10px;
+      }
+      
+      .download-icon {
+        font-size: 1.2em;
+      }
+    }
+    
+    @media (max-width: 400px) {
+      .section-title {
+        font-size: 1.8em;
+      }
+    }
+    
+    /* تأثيرات WOW.js - تعديل الأنيميشن - إبطاء السرعة */
+    .wow {
+      visibility: hidden;
+      animation-duration: 1.5s;
+    }
+    
+    /* أنيميشن من الأعلى للأسفل */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .animate__fadeInDown {
+      animation-name: fadeInDown;
+    }
+    
+    /* أنيميشن من الأسفل للأعلى */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .animate__fadeInUp {
+      animation-name: fadeInUp;
+    }
+    
+    /* أنيميشن للتأكيد على التحميل */
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -50px);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+    }
+    
+    @keyframes slideUp {
+      from {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+      to {
+        opacity: 0;
+        transform: translate(-50%, -50px);
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="overlay"></div>
+<div class="particles" id="particles"></div>
+
+<!-- شريط التنقل - شفاف تماماً -->
+<div class="nav-bar">
+  <div class="logo-section">
+    <img src="./assets/وزارة-التعليم.png" alt="وزارة التعليم العالي والبحث العلمي" class="wow animate__animated animate__fadeInLeft">
+  </div>
+  
+  <div class="nav-links" id="nav-links">
+    <a href="index.html" class="nav-link wow animate__animated animate__fadeInDown" data-wow-delay="0.1s" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+    <a href="map.html" class="nav-link active wow animate__animated animate__fadeInDown" data-wow-delay="0.2s" data-ar="خريطة المعهد" data-en="Institute Map">خريطة المعهد</a>
+    <a href="about.html" class="nav-link wow animate__animated animate__fadeInDown" data-wow-delay="0.3s" data-ar="عن المعهد" data-en="About">عن المعهد</a>
+    <a href="call-us.html" class="nav-link wow animate__animated animate__fadeInDown" data-wow-delay="0.4s" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+  </div>
+  
+  <div class="user-actions">
+    <div class="language-toggle wow animate__animated animate__fadeInRight" data-wow-delay="0.5s" onclick="toggleLanguage()">
+      <i data-feather="globe"></i>
+    </div>
+    
+    <div class="hamburger-menu" id="hamburger-menu">
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+    </div>
+  </div>
+</div>
+
+<!-- قائمة الموبايل المنسدلة -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html" class="nav-link wow animate__animated animate__fadeIn" data-wow-delay="0.1s" data-ar="الرئيسية" data-en="Home"><i data-feather="home"></i> الرئيسية</a>
+  <a href="map.html" class="nav-link active wow animate__animated animate__fadeIn" data-wow-delay="0.2s" data-ar="خريطة المعهد" data-en="Institute Map"><i data-feather="map"></i> خريطة المعهد</a>
+  <a href="about.html" class="nav-link wow animate__animated animate__fadeIn" data-wow-delay="0.3s" data-ar="عن المعهد" data-en="About"><i data-feather="info"></i> عن المعهد</a>
+  <a href="call-us.html" class="nav-link wow animate__animated animate__fadeIn" data-wow-delay="0.4s" data-ar="تواصل معنا" data-en="Contact"><i data-feather="mail"></i> تواصل معنا</a>
+</div>
+
+<!-- قسم خريطة المعهد -->
+<div class="map-section">
+  <h2 class="section-title wow animate__animated animate__fadeInDown" data-ar="خريطة المعهد" data-en="Institute Map">خريطة المعهد</h2>
+  
+  <p class="section-subtitle wow animate__animated animate__fadeInUp" data-wow-delay="0.2s" data-ar="استكشف معهد إعداد القادة بحلوان من خلال الخريطة التفاعلية. يمكنك تحميل خريطة المعهد للرجوع إليها في أي وقت ومعرفة أهم الأماكن داخل المعهد." data-en="Explore the Institute of Leadership Preparation in Helwan through the interactive map. You can download the institute map for reference at any time and learn about the most important places inside the institute.">استكشف معهد إعداد القادة بحلوان من خلال الخريطة التفاعلية. يمكنك تحميل خريطة المعهد للرجوع إليها في أي وقت ومعرفة أهم الأماكن داخل المعهد.</p>
+  
+  <div class="map-container wow animate__animated animate__zoomIn" data-wow-delay="0.4s">
+    <img src="./assets/maps.png" alt="خريطة معهد إعداد القادة بحلوان" class="map-image" id="map-image">
+    <div class="download-overlay" id="download-btn">
+      <i class="download-icon" data-feather="download"></i>
+    </div>
+  </div>
+</div>
+
+<!-- قسم الأماكن المهمة -->
+<div class="places-section">
+  <h2 class="section-title wow animate__animated animate__fadeInDown" data-ar="أهم الأماكن في المعهد" data-en="Important Places in the Institute">أهم الأماكن في المعهد</h2>
+  
+  <div class="places-grid">
+    <!-- بوابة الدخول -->
+    <div class="place-card wow animate__animated animate__fadeInUp" data-wow-delay="0.1s">
+      <div class="place-image" style="background-image: url('./assets/بوابة-الدخول.jpg')"></div>
+      <div class="place-content">
+        <div class="place-header">
+          <i class="place-icon" data-feather="git-merge"></i>
+          <h3 class="place-title" data-ar="بوابة الدخول" data-en="Entrance Gate">بوابة الدخول</h3>
+        </div>
+        <p class="place-desc" data-ar="البوابة الرئيسية للمعهد، حيث يستقبل الزوار والمتدربين. تتميز بتصميمها الجميل الذي يعكس هوية المعهد الرائدة." data-en="The main gate of the institute, where visitors and trainees are welcomed. It features a beautiful design that reflects the institute's leading identity.">البوابة الرئيسية للمعهد، حيث يستقبل الزوار والمتدربين. تتميز بتصميمها الجميل الذي يعكس هوية المعهد الرائدة.</p>
+        <a href="https://maps.google.com/?q=29.8615,31.3247" target="_blank" class="place-btn" data-ar="عرض على الخريطة" data-en="View on Map">عرض على الخريطة</a>
+      </div>
+    </div>
+    
+    <!-- ملعب كرة القدم -->
+    <div class="place-card wow animate__animated animate__fadeInUp" data-wow-delay="0.2s">
+      <div class="place-image" style="background-image: url('./assets/ملعب-كرة-القدم.jpg')"></div>
+      <div class="place-content">
+        <div class="place-header">
+          <i class="place-icon" data-feather="target"></i>
+          <h3 class="place-title" data-ar="ملعب كرة القدم" data-en="Football Field">ملعب كرة القدم</h3>
+        </div>
+        <p class="place-desc" data-ar="ملعب كرة قدم مجهز بأرضية عشبية وإضاءة مناسبة للمباريات الليلية. يتسع لعدد كبير من المتفرجين." data-en="A football field equipped with a grass surface and appropriate lighting for night matches. It accommodates a large number of spectators.">ملعب كرة قدم مجهز بأرضية عشبية وإضاءة مناسبة للمباريات الليلية. يتسع لعدد كبير من المتفرجين.</p>
+        <a href="https://maps.google.com/?q=29.8612,31.3249" target="_blank" class="place-btn" data-ar="عرض على الخريطة" data-en="View on Map">عرض على الخريطة</a>
+      </div>
+    </div>
+    
+    <!-- ساحة العلم -->
+    <div class="place-card wow animate__animated animate__fadeInUp" data-wow-delay="0.3s">
+      <div class="place-image" style="background-image: url('./assets/ساحة-العلم.jpg')"></div>
+      <div class="place-content">
+        <div class="place-header">
+          <i class="place-icon" data-feather="flag"></i>
+          <h3 class="place-title" data-ar="ساحة العلم" data-en="Flag Square">ساحة العلم</h3>
+        </div>
+        <p class="place-desc" data-ar="ساحة واسعة مخصصة لرفع العلم الوطني وإقامة الاحتفالات الرسمية والأنشطة الطلابية." data-en="A spacious square dedicated to raising the national flag and holding official celebrations and student activities.">ساحة واسعة مخصصة لرفع العلم الوطني وإقامة الاحتفالات الرسمية والأنشطة الطلابية.</p>
+        <a href="https://maps.google.com/?q=29.8618,31.3251" target="_blank" class="place-btn" data-ar="عرض على الخريطة" data-en="View on Map">عرض على الخريطة</a>
+      </div>
+    </div>
+    
+    <!-- المسرح المكشوف -->
+    <div class="place-card wow animate__animated animate__fadeInUp" data-wow-delay="0.4s">
+      <div class="place-image" style="background-image: url('./assets/المسرح-المكشوف.jpg')"></div>
+      <div class="place-content">
+        <div class="place-header">
+          <i class="place-icon" data-feather="video"></i>
+          <h3 class="place-title" data-ar="المسرح المكشوف" data-en="Open Theater">المسرح المكشوف</h3>
+        </div>
+        <p class="place-desc" data-ar="مسرح خارجي مجهز بأحدث أنظمة الصوت والإضاءة، يستخدم للعروض الفنية والمسرحية في الهواء الطلق." data-en="An outdoor theater equipped with the latest sound and lighting systems, used for artistic and theatrical performances in the open air.">مسرح خارجي مجهز بأحدث أنظمة الصوت والإضاءة، يستخدم للعروض الفنية والمسرحية في الهواء الطلق.</p>
+        <a href="https://maps.google.com/?q=29.8610,31.3253" target="_blank" class="place-btn" data-ar="عرض على الخريطة" data-en="View on Map">عرض على الخريطة</a>
+      </div>
+    </div>
+    
+    <!-- الفيلا البحرية -->
+    <div class="place-card wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">
+      <div class="place-image" style="background-image: url('./assets/الفيلا-البحرية.jpg')"></div>
+      <div class="place-content">
+        <div class="place-header">
+          <i class="place-icon" data-feather="home"></i>
+          <h3 class="place-title" data-ar="الفيلا البحرية" data-en="Sea Villa">الفيلا البحرية</h3>
+        </div>
+        <p class="place-desc" data-ar="فيلا فاخرة مطلة على البحر، تستخدم لإقامة الضيوف المهمين والمحاضرين الدوليين." data-en="A luxurious villa overlooking the sea, used to accommodate important guests and international lecturers.">فيلا فاخرة مطلة على البحر، تستخدم لإقامة الضيوف المهمين والمحاضرين الدوليين.</p>
+        <a href="https://maps.google.com/?q=29.8613,31.3255" target="_blank" class="place-btn" data-ar="عرض على الخريطة" data-en="View on Map">عرض على الخريطة</a>
+      </div>
+    </div>
+    
+    <!-- الفندق السكني -->
+    <div class="place-card wow animate__animated animate__fadeInUp" data-wow-delay="0.6s">
+      <div class="place-image" style="background-image: url('./assets/الفندق-السكني.jpg')"></div>
+      <div class="place-content">
+        <div class="place-header">
+          <i class="place-icon" data-feather="hotel"></i>
+          <h3 class="place-title" data-ar="الفندق السكني" data-en="Residential Hotel">الفندق السكني</h3>
+        </div>
+        <p class="place-desc" data-ar="مبنى فندقي مجهز بأعلى المعايير لإقامة المتدربين والزوار، يوفر غرف مريحة وخدمات متكاملة." data-en="A hotel building equipped with the highest standards for the accommodation of trainees and visitors, providing comfortable rooms and integrated services.">مبنى فندقي مجهز بأعلى المعايير لإقامة المتدربين والزوار، يوفر غرف مريحة وخدمات متكاملة.</p>
+        <a href="https://maps.google.com/?q=29.8608,31.3257" target="_blank" class="place-btn" data-ar="عرض على الخريطة" data-en="View on Map">عرض على الخريطة</a>
+      </div>
+    </div>
+    
+    <!-- المطعم -->
+    <div class="place-card wow animate__animated animate__fadeInUp" data-wow-delay="0.7s">
+      <div class="place-image" style="background-image: url('./assets/المطعم.jpg')"></div>
+      <div class="place-content">
+        <div class="place-header">
+          <i class="place-icon" data-feather="coffee"></i>
+          <h3 class="place-title" data-ar="المطعم" data-en="Restaurant">المطعم</h3>
+        </div>
+        <p class="place-desc" data-ar="يقدم المطعم وجبات متنوعة وصحية للمتدربين والموظفين. يعمل على فترتين للغداء والعشاء ويوفر خيارات متنوعة تناسب جميع الأذواق." data-en="The restaurant serves diverse and healthy meals for trainees and employees. It operates in two shifts for lunch and dinner and provides various options to suit all tastes.">يقدم المطعم وجبات متنوعة وصحية للمتدربين والموظفين. يعمل على فترتين للغداء والعشاء ويوفر خيارات متنوعة تناسب جميع الأذواق.</p>
+        <a href="https://maps.google.com/?q=29.8610,31.3253" target="_blank" class="place-btn" data-ar="عرض على الخريطة" data-en="View on Map">عرض على الخريطة</a>
+      </div>
+    </div>
+    
+    <!-- المكتبة -->
+    <div class="place-card wow animate__animated animate__fadeInUp" data-wow-delay="0.8s">
+      <div class="place-image" style="background-image: url('./assets/المكتبة.jpg')"></div>
+      <div class="place-content">
+        <div class="place-header">
+          <i class="place-icon" data-feather="book"></i>
+          <h3 class="place-title" data-ar="المكتبة" data-en="Library">المكتبة</h3>
+        </div>
+        <p class="place-desc" data-ar="تحتوي المكتبة على آلاف الكتب والمصادر العلمية في مجالات القيادة والإدارة والتنمية البشرية. توفر مساحات هادئة للدراسة والبحث." data-en="The library contains thousands of books and scientific sources in the fields of leadership, management and human development. It provides quiet spaces for study and research.">تحتوي المكتبة على آلاف الكتب والمصادر العلمية في مجالات القيادة والإدارة والتنمية البشرية. توفر مساحات هادئة للدراسة والبحث.</p>
+        <a href="https://maps.google.com/?q=29.8618,31.3251" target="_blank" class="place-btn" data-ar="عرض على الخريطة" data-en="View on Map">عرض على الخريطة</a>
+      </div>
+    </div>
+    
+    <!-- المسجد -->
+    <div class="place-card wow animate__animated animate__fadeInUp" data-wow-delay="0.9s">
+      <div class="place-image" style="background-image: url('./assets/المسجد.jpg')"></div>
+      <div class="place-content">
+        <div class="place-header">
+          <i class="place-icon" data-feather="compass"></i>
+          <h3 class="place-title" data-ar="مسجد المعهد" data-en="Institute Mosque">مسجد المعهد</h3>
+        </div>
+        <p class="place-desc" data-ar="مسجد فسيح يتسع لأكثر من 300 مصلٍ. مجهز بأحدث أنظمة الصوت ومكيفات الهواء لراحة المصلين. يقام فيه صلاة الجمعة والصلوات الخمس." data-en="A spacious mosque that accommodates more than 300 worshipers. Equipped with the latest sound systems and air conditioners for the comfort of worshipers. Friday prayers and the five daily prayers are held there.">مسجد فسيح يتسع لأكثر من 300 مصلٍ. مجهز بأحدث أنظمة الصوت ومكيفات الهواء لراحة المصلين. يقام فيه صلاة الجمعة والصلوات الخمس.</p>
+        <a href="https://maps.google.com/?q=29.8613,31.3255" target="_blank" class="place-btn" data-ar="عرض على الخريطة" data-en="View on Map">عرض على الخريطة</a>
+      </div>
+    </div>
+    
+    <!-- المسرح -->
+    <div class="place-card wow animate__animated animate__fadeInUp" data-wow-delay="1.0s">
+      <div class="place-image" style="background-image: url('./assets/المسرح.jpg')"></div>
+      <div class="place-content">
+        <div class="place-header">
+          <i class="place-icon" data-feather="video"></i>
+          <h3 class="place-title" data-ar="المسرح" data-en="Theater">المسرح</h3>
+        </div>
+        <p class="place-desc" data-ar="مسرح داخلي مجهز بأحدث التقنيات الصوتية والمرئية، يستضيف المؤتمرات والعروض الفنية والمسرحية." data-en="An indoor theater equipped with the latest audio and visual technologies, hosting conferences, artistic and theatrical performances.">مسرح داخلي مجهز بأحدث التقنيات الصوتية والمرئية، يستضيف المؤتمرات والعروض الفنية والمسرحية.</p>
+        <a href="https://maps.google.com/?q=29.8608,31.3257" target="_blank" class="place-btn" data-ar="عرض على الخريطة" data-en="View on Map">عرض على الخريطة</a>
+      </div>
+    </div>
+    
+    <!-- المبني الإداري -->
+    <div class="place-card wow animate__animated animate__fadeInUp" data-wow-delay="1.1s">
+      <div class="place-image" style="background-image: url('./assets/المبنى-الإداري.jpg')"></div>
+      <div class="place-content">
+        <div class="place-header">
+          <i class="place-icon" data-feather="building"></i>
+          <h3 class="place-title" data-ar="المبني الإداري" data-en="Administrative Building">المبني الإداري</h3>
+        </div>
+        <p class="place-desc" data-ar="يضم المبنى الإداري مكاتب إدارة المعهد والشؤون الإدارية والمالية. هنا يمكنك استكمال الإجراءات الرسمية والتواصل مع الإدارة." data-en="The administrative building houses the institute's management offices, administrative and financial affairs. Here you can complete official procedures and communicate with the administration.">يضم المبنى الإداري مكاتب إدارة المعهد والشؤون الإدارية والمالية. هنا يمكنك استكمال الإجراءات الرسمية والتواصل مع الإدارة.</p>
+        <a href="https://maps.google.com/?q=29.8615,31.3247" target="_blank" class="place-btn" data-ar="عرض على الخريطة" data-en="View on Map">عرض على الخريطة</a>
+      </div>
+    </div>
+    
+    <!-- الفيلا القبلية -->
+    <div class="place-card wow animate__animated animate__fadeInUp" data-wow-delay="1.2s">
+      <div class="place-image" style="background-image: url('./assets/الفيلا-القبلية.jpg')"></div>
+      <div class="place-content">
+        <div class="place-header">
+          <i class="place-icon" data-feather="home"></i>
+          <h3 class="place-title" data-ar="الفيلا القبلية" data-en="Qiblia Villa">الفيلا القبلية</h3>
+        </div>
+        <p class="place-desc" data-ar="فيلا مخصصة لإقامة المحاضرين والضيوف المميزين، تتميز بموقعها المميز وتصميمها الفاخر." data-en="A villa dedicated to the accommodation of lecturers and distinguished guests, characterized by its prime location and luxurious design.">فيلا مخصصة لإقامة المحاضرين والضيوف المميزين، تتميز بموقعها المميز وتصميمها الفاخر.</p>
+        <a href="https://maps.google.com/?q=29.8612,31.3249" target="_blank" class="place-btn" data-ar="عرض على الخريطة" data-en="View on Map">عرض على الخريطة</a>
+      </div>
+    </div>
+    
+    <!-- ورش عمل -->
+    <div class="place-card wow animate__animated animate__fadeInUp" data-wow-delay="1.3s">
+      <div class="place-image" style="background-image: url('./assets/ورش-عمل.jpg')"></div>
+      <div class="place-content">
+        <div class="place-header">
+          <i class="place-icon" data-feather="tool"></i>
+          <h3 class="place-title" data-ar="ورش عمل" data-en="Workshops">ورش عمل</h3>
+        </div>
+        <p class="place-desc" data-ar="قاعات مجهزة لتقديم ورش العمل التدريبية والتطبيقية في مختلف المجالات، مزودة بأحدث الوسائل التعليمية." data-en="Halls equipped to provide training and applied workshops in various fields, equipped with the latest educational means.">قاعات مجهزة لتقديم ورش العمل التدريبية والتطبيقية في مختلف المجالات، مزودة بأحدث الوسائل التعليمية.</p>
+        <a href="https://maps.google.com/?q=29.8618,31.3251" target="_blank" class="place-btn" data-ar="عرض على الخريطة" data-en="View on Map">عرض على الخريطة</a>
+      </div>
+    </div>
+    
+    <!-- ورش العمل VIP -->
+    <div class="place-card wow animate__animated animate__fadeInUp" data-wow-delay="1.4s">
+      <div class="place-image" style="background-image: url('./assets/ورش-عمل-VIP.jpg')"></div>
+      <div class="place-content">
+        <div class="place-header">
+          <i class="place-icon" data-feather="tool" style="color: #ffd700;"></i>
+          <h3 class="place-title" data-ar="ورش العمل VIP" data-en="VIP Workshops">ورش العمل VIP</h3>
+        </div>
+        <p class="place-desc" data-ar="قاعات فاخرة مجهزة بأعلى المواصفات لورش العمل الخاصة والمتميزة، تستخدم للتدريبات المتقدمة والندوات الخاصة." data-en="Luxurious halls equipped with the highest specifications for special and distinguished workshops, used for advanced training and private seminars.">قاعات فاخرة مجهزة بأعلى المواصفات لورش العمل الخاصة والمتميزة، تستخدم للتدريبات المتقدمة والندوات الخاصة.</p>
+        <a href="https://maps.google.com/?q=29.8610,31.3253" target="_blank" class="place-btn" data-ar="عرض على الخريطة" data-en="View on Map">عرض على الخريطة</a>
+      </div>
+    </div>
+    
+    <!-- المغسلة -->
+    <div class="place-card wow animate__animated animate__fadeInUp" data-wow-delay="1.5s">
+      <div class="place-image" style="background-image: url('./assets/المغسلة.jpg')"></div>
+      <div class="place-content">
+        <div class="place-header">
+          <i class="place-icon" data-feather="droplet"></i>
+          <h3 class="place-title" data-ar="المغسلة" data-en="Laundry">المغسلة</h3>
+        </div>
+        <p class="place-desc" data-ar="مرفق مغسلة مجهز بأحدث الأجهزة لخدمة المتدربين والمقيمين في المعهد، يوفر خدمات الغسيل والكي." data-en="A laundry facility equipped with the latest devices to serve trainees and residents of the institute, providing washing and ironing services.">مرفق مغسلة مجهز بأحدث الأجهزة لخدمة المتدربين والمقيمين في المعهد، يوفر خدمات الغسيل والكي.</p>
+        <a href="https://maps.google.com/?q=29.8613,31.3255" target="_blank" class="place-btn" data-ar="عرض على الخريطة" data-en="View on Map">عرض على الخريطة</a>
+      </div>
+    </div>
+    
+    <!-- الجراج -->
+    <div class="place-card wow animate__animated animate__fadeInUp" data-wow-delay="1.6s">
+      <div class="place-image" style="background-image: url('./assets/الجراج.jpg')"></div>
+      <div class="place-content">
+        <div class="place-header">
+          <i class="place-icon" data-feather="truck"></i>
+          <h3 class="place-title" data-ar="الجراج" data-en="Garage">الجراج</h3>
+        </div>
+        <p class="place-desc" data-ar="مواقف سيارات مغطاة ومجهزة لركن سيارات الموظفين والزوار، مع نظام أمني متكامل لسلامة المركبات." data-en="Covered and equipped car parks for employees and visitors' cars, with an integrated security system for vehicle safety.">مواقف سيارات مغطاة ومجهزة لركن سيارات الموظفين والزوار، مع نظام أمني متكامل لسلامة المركبات.</p>
+        <a href="https://maps.google.com/?q=29.8608,31.3257" target="_blank" class="place-btn" data-ar="عرض على الخريطة" data-en="View on Map">عرض على الخريطة</a>
+      </div>
+    </div>
+    
+    <!-- الكافتيريا -->
+    <div class="place-card wow animate__animated animate__fadeInUp" data-wow-delay="1.7s">
+      <div class="place-image" style="background-image: url('./assets/الكافتيريا.jpg')"></div>
+      <div class="place-content">
+        <div class="place-header">
+          <i class="place-icon" data-feather="coffee"></i>
+          <h3 class="place-title" data-ar="الكافتيريا" data-en="Cafeteria">الكافتيريا</h3>
+        </div>
+        <p class="place-desc" data-ar="مكان مريح لتناول المشروبات والوجبات الخفيفة، يوفر أجواء هادئة للراحة والاسترخاء بين الفعاليات." data-en="A comfortable place to have drinks and light meals, providing a quiet atmosphere for rest and relaxation between events.">مكان مريح لتناول المشروبات والوجبات الخفيفة، يوفر أجواء هادئة للراحة والاسترخاء بين الفعاليات.</p>
+        <a href="https://maps.google.com/?q=29.8615,31.3247" target="_blank" class="place-btn" data-ar="عرض على الخريطة" data-en="View on Map">عرض على الخريطة</a>
+      </div>
+    </div>
+    
+    <!-- الشؤن الادارية -->
+    <div class="place-card wow animate__animated animate__fadeInUp" data-wow-delay="1.8s">
+      <div class="place-image" style="background-image: url('./assets/الشؤون-الإدارية.jpg')"></div>
+      <div class="place-content">
+        <div class="place-header">
+          <i class="place-icon" data-feather="users"></i>
+          <h3 class="place-title" data-ar="الشؤون الإدارية" data-en="Administrative Affairs">الشؤون الإدارية</h3>
+        </div>
+        <p class="place-desc" data-ar="قسم متخصص في متابعة الشؤون الإدارية للمتدربين والموظفين، واستقبال الطلبات والإجراءات الإدارية المختلفة." data-en="A department specialized in following up on the administrative affairs of trainees and employees, and receiving requests and various administrative procedures.">قسم متخصص في متابعة الشؤون الإدارية للمتدربين والموظفين، واستقبال الطلبات والإجراءات الإدارية المختلفة.</p>
+        <a href="https://maps.google.com/?q=29.8612,31.3249" target="_blank" class="place-btn" data-ar="عرض على الخريطة" data-en="View on Map">عرض على الخريطة</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- الفوتر -->
+<div class="footer">
+  <div class="footer-content">
+    <!-- القسم الأول: الشعار والوصف والروابط الاجتماعية -->
+    <div class="footer-col">
+      <div class="footer-logo">
+        <img src="./assets/إعداد-القادة.png" alt="شعار معهد إعداد القادة" class="wow animate__animated animate__bounceIn" data-wow-delay="0.1s">
+        <img src="./assets/وزارة-التعليم.png" alt="وزارة التعليم العالي والبحث العلمي" class="wow animate__animated animate__bounceIn" data-wow-delay="0.2s">
+      </div>
+      
+      <p class="footer-about wow animate__animated animate__fadeInUp" data-wow-delay="0.3s" data-ar="معهد إعداد القادة بحلوان هو مؤسسة تعليمية رائدة تهدف إلى إعداد القادة وتنمية مهاراتهم من خلال برامج تدريبية متخصصة وفعاليات ثقافية وعلمية متنوعة." data-en="The Institute of Leadership Preparation in Helwan is a leading educational institution that aims to prepare leaders and develop their skills through specialized training programs and various cultural and scientific events.">معهد إعداد القادة بحلوان هو مؤسسة تعليمية رائدة تهدف إلى إعداد القادة وتنمية مهاراتهم من خلال برامج تدريبية متخصصة وفعاليات ثقافية وعلمية متنوعة.</p>
+      
+      <div class="footer-social">
+        <a href="#" class="footer-social-icon wow animate__animated animate__fadeInUp" data-wow-delay="0.4s"><i data-feather="facebook"></i></a>
+        <a href="#" class="footer-social-icon wow animate__animated animate__fadeInUp" data-wow-delay="0.5s"><i data-feather="youtube"></i></a>
+      </div>
+    </div>
+    
+    <!-- القسم الثاني: روابط سريعة -->
+    <div class="footer-col">
+      <h3 class="footer-links-title wow animate__animated animate__fadeInUp" data-wow-delay="0.2s" data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h3>
+      <ul class="footer-links">
+        <li><a href="index.html" class="wow animate__animated animate__fadeInUp" data-wow-delay="0.3s" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+        <li><a href="map.html" class="wow animate__animated animate__fadeInUp" data-wow-delay="0.4s" data-ar="خريطة المعهد" data-en="Institute Map">خريطة المعهد</a></li>
+        <li><a href="about.html" class="wow animate__animated animate__fadeInUp" data-wow-delay="0.5s" data-ar="عن المعهد" data-en="About">عن المعهد</a></li>
+        <li><a href="call-us.html" class="wow animate__animated animate__fadeInUp" data-wow-delay="0.6s" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a></li>
+      </ul>
+    </div>
+    
+    <!-- القسم الثالث: الصفحة الرئيسية -->
+    <div class="footer-col">
+      <h3 class="footer-links-title wow animate__animated animate__fadeInUp" data-wow-delay="0.3s" data-ar="الصفحة الرئيسية" data-en="Home Page">الصفحة الرئيسية</h3>
+      <ul class="footer-links">
+        <li><a href="index.html" class="wow animate__animated animate__fadeInUp" data-wow-delay="0.4s" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+        <li><a href="index.html#about" class="wow animate__animated animate__fadeInUp" data-wow-delay="0.5s" data-ar="من نحن" data-en="About Us">من نحن</a></li>
+        <li><a href="index.html#activities" class="wow animate__animated animate__fadeInUp" data-wow-delay="0.6s" data-ar="الأنشطة والفعاليات" data-en="Activities and Events">الأنشطة والفعاليات</a></li>
+        <li><a href="index.html#stats" class="wow animate__animated animate__fadeInUp" data-wow-delay="0.7s" data-ar="إحصائيات وأرقام" data-en="Statistics and Numbers">إحصائيات وأرقام</a></li>
+        <li><a href="index.html#contact" class="wow animate__animated animate__fadeInUp" data-wow-delay="0.8s" data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</a></li>
+      </ul>
+    </div>
+    
+    <!-- الخط الفاصل -->
+    <div class="footer-divider"></div>
+    
+    <!-- حقوق النشر -->
+    <div class="footer-copyright wow animate__animated animate__fadeInUp" data-wow-delay="0.5s">
+      <span data-ar="&copy; 2025 جميع الحقوق محفوظة لمعهد إعداد القادة بحلوان - وزارة التعليم العالي والبحث العلمي" data-en="&copy; 2025 All Rights Reserved to Institute of Leadership Preparation in Helwan - Ministry of Higher Education and Scientific Research">&copy; 2025 جميع الحقوق محفوظة لمعهد إعداد القادة بحلوان - وزارة التعليم العالي والبحث العلمي</span>
+    </div>
+    
+    <!-- حقوق الملكية -->
+    <div class="footer-copyright wow animate__animated animate__fadeInUp" data-wow-delay="0.6s">
+      <span data-ar="تم التصميم والبرمجة بواسطة فريق تطوير معهد إعداد القادة" data-en="Designed and developed by the Institute of Leadership Preparation development team">تم التصميم والبرمجة بواسطة فريق تطوير معهد إعداد القادة</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  // تهيئة الصفحة
+  document.addEventListener('DOMContentLoaded', function() {
+    // إنشاء الجزيئات المتحركة
+    createParticles();
+    
+    // التحكم في القائمة المنسدلة على الموبايل
+    setupMobileMenu();
+    
+    // تهيئة WOW.js للأنيميشن - إبطاء السرعة
+    new WOW({
+      animateClass: 'animate__animated',
+      offset: 100,
+      mobile: true,
+      duration: '1.5s'
+    }).init();
+    
+    // تحميل أيقونات Feather
+    feather.replace();
+    
+    // إعداد التمرير السلس
+    setupSmoothScrolling();
+    
+    // إعداد زر تحميل الخريطة
+    setupDownloadButton();
+  });
+
+  // تبديل اللغة مع ترجمة كاملة للمحتوى
+  function toggleLanguage() {
+    const currentLang = document.documentElement.lang;
+    const elementsToTranslate = document.querySelectorAll('[data-ar], [data-en]');
+    
+    if (currentLang === 'ar') {
+      document.documentElement.lang = 'en';
+      document.documentElement.dir = 'ltr';
+      document.title = 'Institute Map - Institute of Leadership Preparation in Helwan';
+      
+      // ترجمة جميع العناصر
+      elementsToTranslate.forEach(el => {
+        if (el.dataset.en) {
+          el.textContent = el.dataset.en;
+        }
+      });
+      
+      // تحديث اتجاه أيقونات Feather
+      feather.replace();
+    } else {
+      document.documentElement.lang = 'ar';
+      document.documentElement.dir = 'rtl';
+      document.title = 'خريطة المعهد - معهد إعداد القادة بحلوان';
+      
+      // إعادة النصوص إلى العربية
+      elementsToTranslate.forEach(el => {
+        if (el.dataset.ar) {
+          el.textContent = el.dataset.ar;
+        }
+      });
+      
+      // تحديث اتجاه أيقونات Feather
+      feather.replace();
+    }
+  }
+
+  // إنشاء الجزيئات المتحركة - نمط الرمال
+  function createParticles() {
+    const particlesContainer = document.getElementById('particles');
+    const count = Math.floor(window.innerWidth / 20);
+    
+    for (let i = 0; i < count; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      
+      const size = Math.random() * 5 + 2;
+      const posX = Math.random() * window.innerWidth;
+      const duration = Math.random() * 15 + 10;
+      const delay = Math.random() * 10;
+      
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.left = `${posX}px`;
+      particle.style.bottom = '0';
+      particle.style.animationDuration = `${duration}s`;
+      particle.style.animationDelay = `${delay}s`;
+      
+      particlesContainer.appendChild(particle);
+    }
+  }
+
+  // إعداد زر تحميل الخريطة
+  function setupDownloadButton() {
+    const downloadBtn = document.getElementById('download-btn');
+    const mapImage = document.getElementById('map-image');
+    
+    downloadBtn.addEventListener('click', function() {
+      // إنشاء رابط لتحميل الصورة
+      const link = document.createElement('a');
+      link.href = mapImage.src;
+      link.download = 'خريطة-معهد-إعداد-القادة-بحلوان.jpg';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      // عرض رسالة تأكيد
+      showDownloadConfirmation();
+    });
+  }
+  
+  // عرض رسالة تأكيد التحميل
+  function showDownloadConfirmation() {
+    // إنشاء عنصر الرسالة
+    const message = document.createElement('div');
+    message.textContent = document.documentElement.lang === 'ar' ? 
+      'تم بدء تحميل الخريطة بنجاح!' : 
+      'Map download started successfully!';
+    
+    message.style.cssText = `
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(45deg, var(--primary-color), var(--primary-hover));
+      color: white;
+      padding: 15px 25px;
+      border-radius: var(--border-radius);
+      z-index: 10000;
+      font-family: var(--font-tajawal);
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      animation: slideDown 0.5s ease-out;
+    `;
+    
+    document.body.appendChild(message);
+    
+    // إزالة الرسالة بعد 3 ثوانٍ
+    setTimeout(() => {
+      message.style.animation = 'slideUp 0.5s ease-in forwards';
+      setTimeout(() => {
+        document.body.removeChild(message);
+      }, 500);
+    }, 3000);
+  }
+
+  // إعداد القائمة المنسدلة للهاتف
+  function setupMobileMenu() {
+    const hamburger = document.getElementById('hamburger-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    hamburger.addEventListener('click', function() {
+      this.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+      
+      if (mobileMenu.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    });
+    
+    document.querySelectorAll('.mobile-menu .nav-link').forEach(link => {
+      link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+    
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-bar') && mobileMenu.classList.contains('active')) {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+
+  // إعداد التمرير السلس للأقسام
+  function setupSmoothScrolling() {
+    // جمع كل الروابط التي تشير إلى أقسام في الصفحة
+    const internalLinks = document.querySelectorAll('a[href^="#"]');
+    
+    // إضافة مستمع حدث لكل رابط
+    internalLinks.forEach(link => {
+      link.addEventListener('click', smoothScrollToSection);
+    });
+  }
+
+  // دالة للتمرير السلس للأقسام
+  function smoothScrollToSection(event) {
+    // منع السلوك الافتراضي للرابط
+    event.preventDefault();
+    
+    // الحصول على الـ ID من سمة href للرابط
+    const targetId = this.getAttribute('href').substring(1);
+    const targetSection = document.getElementById(targetId);
+    
+    if (targetSection) {
+      // حساب الموقع مع مراعاة ارتفاع شريط التنقل
+      const navBarHeight = document.querySelector('.nav-bar').offsetHeight;
+      const targetPosition = targetSection.offsetTop - navBarHeight;
+      
+      // التمرير السلس إلى القسم
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
+      
+      // تحديث عنوان URL بدون إعادة تحميل الصفحة
+      history.pushState(null, null, `#${targetId}`);
+    }
+  }
+</script>
+</body>
+</html>
